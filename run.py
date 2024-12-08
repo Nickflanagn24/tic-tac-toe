@@ -1,3 +1,9 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
+class TicTacToe:
+    def __init__(self):
+        self.board = [[" " for _ in range(3)] for _ in range(3)]
+        self.players = ["X", "O"]
+        self.current_player = 0
+        self.player_names = ["Player 1", "Player 2"]
+        self.mode = "human"
+        self.difficulty = ""
+
