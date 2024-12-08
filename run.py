@@ -7,3 +7,7 @@ class TicTacToe:
         self.mode = "human"
         self.difficulty = ""
 
+def print_board(self):
+    for row in self.board:
+        print(" | ".join(f"{'❌' if cell == 'X' else '⭕' if cell == 'O' else '⬜'}" for cell in row))
+        print("-" * 11)
