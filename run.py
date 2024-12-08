@@ -23,3 +23,15 @@ def play_turn(self):
         self.board[row][col] = self.players[self.current_player]
     return True
 
+def get_human_move(self):
+    while True:
+        try:
+            move = input("Enter your move (row and column as '1 3'): ")
+            row, col = map(int, move.split())
+            if row in range(1, 4) and col in range(1, 4):
+                return row - 1, col - 1
+            else:
+                print("Please enter numbers between 1 and 3.")
+        except ValueError:
+            print("Invalid input! Please enter two numbers separated by a space.")
+
