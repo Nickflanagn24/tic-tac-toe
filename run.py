@@ -35,3 +35,14 @@ def get_human_move(self):
         except ValueError:
             print("Invalid input! Please enter two numbers separated by a space.")
 
+def check_winner(self, player):
+    for row in self.board:
+        if all(cell == player for cell in row):
+            return player
+    for col in range(3):
+        if all(self.board[row][col] == player for row in range(3)):
+            return player
+    if all(self.board[i][i] == player for i in range(3)) or all(self.board[i][2 - i] == player for i in range(3)):
+        return player
+    return None
+
