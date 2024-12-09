@@ -186,5 +186,21 @@ class TicTacToe:
                 self.end_game()
                 break
             self.current_player = 1 - self.current_player
-
+    def end_game(self):
+        """Offer options after the game finishes."""
+        print("\nWhat would you like to do next?")
+        print("1. Return to the start screen")
+        print("2. Play again")
+        print("3. Exit")
+        choice = input("Enter your choice: ")
+        if choice == "1":
+            self.welcome_screen()
+        elif choice == "2":
+            self.play_game()
+        elif choice == "3":
+            print(f"Thank you for playing, {self.player_names[0]} and {self.player_names[1]}!")
+            exit()
+        else:
+            print("Invalid choice! Exiting...")
+            exit()
     
