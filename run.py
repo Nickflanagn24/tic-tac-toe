@@ -53,3 +53,17 @@ def computer_move(self):
     empty_cells = [(r, c) for r in range(3) for c in range(3) if self.board[r][c] == " "]
     move = random.choice(empty_cells)
     self.board[move[0]][move[1]] = self.players[self.current_player]
+
+def minimax_move(self):
+    best_score = float("-inf")
+    best_move = None
+    for r in range(3):
+        for c in range(3):
+            if self.board[r][c] == " ":
+                self.board[r][c] = self.players[1]
+                score = self.minimax(False)
+                self.board[r][c] = " "
+                if score > best_score:
+                    best_score = score
+                    best_move = (r, c)
+    return best_move
