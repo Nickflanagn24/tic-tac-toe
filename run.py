@@ -46,9 +46,7 @@ class TicTacToe:
         self.board = [[" " for _ in range(3)] for _ in range(3)]
         self.current_player = 0
 
-
-
-def play_turn(self):
+    def play_turn(self):
     if self.mode == "computer" and self.current_player == 1:
         self.computer_move()
     else:
@@ -59,7 +57,7 @@ def play_turn(self):
         self.board[row][col] = self.players[self.current_player]
     return True
 
-def get_human_move(self):
+    def get_human_move(self):
     while True:
         try:
             move = input("Enter your move (row and column as '1 3'): ")
@@ -70,6 +68,15 @@ def get_human_move(self):
                 print("Please enter numbers between 1 and 3.")
         except ValueError:
             print("Invalid input! Please enter two numbers separated by a space.")
+
+    def computer_move(self):
+        """Make a move for the computer based on difficulty."""
+        if self.difficulty == "Easy":
+            empty_cells = [(r, c) for r in range(3) for c in range(3) if self.board[r][c] == " "]
+            move = random.choice(empty_cells)
+        else:  # Hard difficulty
+            move = self.minimax_move()
+        self.board[move[0]][move[1]] = self.players[self.current_player]
 
 def check_winner(self, player):
     for row in self.board:
