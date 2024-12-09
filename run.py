@@ -33,10 +33,20 @@ class TicTacToe:
         print("- If the board fills up without a winner, it's a tie.")
         print()
 
-def print_board(self):
-    for row in self.board:
-        print(" | ".join(f"{'❌' if cell == 'X' else '⭕' if cell == 'O' else '⬜'}" for cell in row))
-        print("-" * 11)
+    def print_board(self):
+        """Print the game board with emojis for better visual appeal."""
+        print("\n")
+        for row in self.board:
+            print(" | ".join(f"{'❌' if cell == 'X' else '⭕' if cell == 'O' else '⬜'}" for cell in row))
+            print("-" * 11)
+        print("\n")
+
+    def reset_board(self):
+        """Reset the game board to an empty state."""
+        self.board = [[" " for _ in range(3)] for _ in range(3)]
+        self.current_player = 0
+
+
 
 def play_turn(self):
     if self.mode == "computer" and self.current_player == 1:
