@@ -9,6 +9,17 @@ class TicTacToe:
         self.mode = "human"
         self.difficulty = ""
 
+    def print_banner(self):
+        """Display the game's banner."""
+        print("//////////////////////////////////////////////////////")
+        print("// _____ _        _____             _____           //")
+        print("///__   (_) ___  /__   \\__ _  ___  /__   \\___   ___ //")
+        print("//  / /\\/ |/ __|   / /\\/ _` |/ __|   / /\\/ _ \\ / _ \\//")
+        print("// / /  | | (__   / / | (_| | (__   / / | (_) |  __///")
+        print("// \\/   |_|\\___|  \\/   \\__,_|\\___|  \\/   \\___/ \\___|//")  
+        print("//////////////////////////////////////////////////////")
+        print("\n")
+
 def print_board(self):
     for row in self.board:
         print(" | ".join(f"{'❌' if cell == 'X' else '⭕' if cell == 'O' else '⬜'}" for cell in row))
