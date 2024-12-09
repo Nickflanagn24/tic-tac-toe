@@ -20,6 +20,19 @@ class TicTacToe:
         print("//////////////////////////////////////////////////////")
         print("\n")
 
+    def print_welcome(self):
+        """Display the welcome message and instructions."""
+        self.print_banner()
+        print("=================================")
+        print("       Welcome to Tic Tac Toe    ")
+        print("=================================")
+        print("Game Instructions:")
+        print("- Two players take turns marking a square on the board.")
+        print("- The first to align 3 of their marks in a row, column, or diagonal wins!")
+        print("- Choose the difficulty level (Easy or Hard) for Human vs Computer mode.")
+        print("- If the board fills up without a winner, it's a tie.")
+        print()
+
 def print_board(self):
     for row in self.board:
         print(" | ".join(f"{'❌' if cell == 'X' else '⭕' if cell == 'O' else '⬜'}" for cell in row))
