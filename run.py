@@ -225,3 +225,19 @@ class TicTacToe:
             self.mode = "human"
             self.player_names[1] = input("Enter name for Player 2: ")
         self.player_names[0] = input("Enter name for Player 1: ")
+
+    def welcome_screen(self):
+        """Display the welcome screen and get user input to start the game."""
+        self.print_welcome()
+        print("1. See instructions")
+        print("2. Start game")
+        choice = input("Enter your choice: ")
+        if choice == "1":
+            print("""
+Tic Tac Toe Instructions:
+- Players take turns marking a square on a 3x3 grid.
+- The first to align 3 of their marks in a row, column, or diagonal wins!
+- If the board fills up without a winner, it's a tie.
+            """)
+        self.setup_game()
+        self.play_game()
