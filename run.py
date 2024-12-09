@@ -122,7 +122,7 @@ class TicTacToe:
                         best_score = min(score, best_score)
             return best_score
 
-def check_winner(self, player):
+    def check_winner(self, player):
     for row in self.board:
         if all(cell == player for cell in row):
             return player
@@ -133,12 +133,58 @@ def check_winner(self, player):
         return player
     return None
 
-def is_full(self):
+    def is_full(self):
     return all(self.board[r][c] != " " for r in range(3) for c in range(3))
 
-def computer_move(self):
-    empty_cells = [(r, c) for r in range(3) for c in range(3) if self.board[r][c] == " "]
-    move = random.choice(empty_cells)
-    self.board[move[0]][move[1]] = self.players[self.current_player]
+    def play_game(self):
+        """Play the full game."""
+        self.reset_board()
+        print(f"\n{self.player_names[0]} is X and {self.player_names[1]} is O.")
+        while True:
+            self.print_board()
+            print(f"{self.player_names[self.current_player]}'s turn ({self.players[self.current_player]}).")
+            if not self.play_turn():
+                continue
+            if self.check_winner(self.players[self.current_player]):
+                self.print_board()
+                if self.mode == "computer" and self.current_player == 1:
+                    print(f"Sorry, {self.player_names[0]}! You lost. Better luck next time!")
+                    print("""
+       :::        ::::::::   ::::::::  :::::::::: :::::::::
+     :+:       :+:    :+: :+:    :+: :+:        :+:    :+:
+    +:+       +:+    +:+ +:+        +:+        +:+    +:+ 
+   +#+       +#+    +:+ +#++:++#++ +#++:++#   +#++:++#:   
+  +#+       +#+    +#+        +#+ +#+        +#+    +#+   
+ #+#       #+#    #+# #+#    #+# #+#        #+#    #+#    
+########## ########   ########  ########## ###    ###     
+                    """)
+                else:
+                    print(f"Congratulations, {self.player_names[self.current_player]}! You win!")
+                    print("""
+:::       ::: ::::::::::: ::::    ::: ::::    ::: :::::::::: :::::::::
+:+:       :+:     :+:     :+:+:   :+: :+:+:   :+: :+:        :+:    :+:
++:+       +:+     +:+     :+:+:+  +:+ :+:+:+  +:+ +:+        +:+    +:+ 
++#+  +:+  +#+     +#+     +#+ +:+ +#+ +#+ +:+ +#+ +#++:++#   +#++:++#:   
++#+ +#+#+ +#+     +#+     +#+  +#+#+# +#+  +#+#+# +#+        +#+    +#+   
+#+# #+#+#      #+#     #+#   #+#+# #+#   #+#+# #+#        #+#    #+#    
+###   ###   ########### ###    #### ###    #### ########## ###    ###     
+                    """)
+                self.end_game()
+                break
+            if self.is_full():
+                self.print_board()
+                print("It's a tie!")
+                print("""
+::::::::::: ::::::::::: ::::::::::
+     :+:         :+:     :+:        
+    +:+         +:+     +:+         
+   +#+         +#+     +#++:++#     
+  +#+         +#+     +#+           
+ #+#         #+#     #+#            
+###     ########### ##########      
+                """)
+                self.end_game()
+                break
+            self.current_player = 1 - self.current_player
 
-
+    
