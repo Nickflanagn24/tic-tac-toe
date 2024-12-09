@@ -48,3 +48,8 @@ def check_winner(self, player):
 
 def is_full(self):
     return all(self.board[r][c] != " " for r in range(3) for c in range(3))
+
+def computer_move(self):
+    empty_cells = [(r, c) for r in range(3) for c in range(3) if self.board[r][c] == " "]
+    move = random.choice(empty_cells)
+    self.board[move[0]][move[1]] = self.players[self.current_player]
