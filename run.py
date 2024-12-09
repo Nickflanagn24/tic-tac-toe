@@ -204,3 +204,24 @@ class TicTacToe:
             print("Invalid choice! Exiting...")
             exit()
     
+    def setup_game(self):
+        """Setup the game mode and difficulty."""
+        print("\nSelect game mode:")
+        print("1. Human vs Human")
+        print("2. Human vs Computer")
+        mode_choice = input("Enter your choice: ")
+        if mode_choice == "2":
+            self.mode = "computer"
+            self.player_names[1] = "Computer"
+            print("Select difficulty:")
+            print("1. Easy")
+            print("2. Hard")
+            difficulty_choice = input("Enter your choice: ")
+            while difficulty_choice not in ["1", "2"]:
+                print("Invalid choice. Please select either 1 (Easy) or 2 (Hard).")
+                difficulty_choice = input("Enter your choice: ")
+            self.difficulty = "Easy" if difficulty_choice == "1" else "Hard"
+        else:
+            self.mode = "human"
+            self.player_names[1] = input("Enter name for Player 2: ")
+        self.player_names[0] = input("Enter name for Player 1: ")
