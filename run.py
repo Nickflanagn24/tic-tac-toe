@@ -78,6 +78,50 @@ class TicTacToe:
             move = self.minimax_move()
         self.board[move[0]][move[1]] = self.players[self.current_player]
 
+    def minimax_move(self):
+        """Minimax algorithm for the computer to make an optimal move in Hard mode."""
+        best_score = float("-inf")
+        best_move = None
+        for r in range(3):
+            for c in range(3):
+                if self.board[r][c] == " ":
+                    self.board[r][c] = self.players[1]
+                    score = self.minimax(False)
+                    self.board[r][c] = " "
+                    if score > best_score:
+                        best_score = score
+                        best_move = (r, c)
+        return best_move
+
+    def minimax(self, is_maximizing):
+        """Recursively evaluate the board using the Minimax algorithm."""
+        winner = self.check_winner("X") or self.check_winner("O")
+        if winner:
+            return 1 if winner == "O" else -1
+        if self.is_full():
+            return 0
+
+        if is_maximizing:
+            best_score = float("-inf")
+            for r in range(3):
+                for c in range(3):
+                    if self.board[r][c] == " ":
+                        self.board[r][c] = "O"
+                        score = self.minimax(False)
+                        self.board[r][c] = " "
+                        best_score = max(score, best_score)
+            return best_score
+        else:
+            best_score = float("inf")
+            for r in range(3):
+                for c in range(3):
+                    if self.board[r][c] == " ":
+                        self.board[r][c] = "X"
+                        score = self.minimax(True)
+                        self.board[r][c] = " "
+                        best_score = min(score, best_score)
+            return best_score
+
 def check_winner(self, player):
     for row in self.board:
         if all(cell == player for cell in row):
@@ -97,16 +141,4 @@ def computer_move(self):
     move = random.choice(empty_cells)
     self.board[move[0]][move[1]] = self.players[self.current_player]
 
-def minimax_move(self):
-    best_score = float("-inf")
-    best_move = None
-    for r in range(3):
-        for c in range(3):
-            if self.board[r][c] == " ":
-                self.board[r][c] = self.players[1]
-                score = self.minimax(False)
-                self.board[r][c] = " "
-                if score > best_score:
-                    best_score = score
-                    best_move = (r, c)
-    return best_move
+
