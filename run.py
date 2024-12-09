@@ -46,3 +46,5 @@ def check_winner(self, player):
         return player
     return None
 
+def is_full(self):
+    return all(self.board[r][c] != " " for r in range(3) for c in range(3))
