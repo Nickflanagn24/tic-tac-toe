@@ -47,27 +47,29 @@ class TicTacToe:
         self.current_player = 0
 
     def play_turn(self):
-    if self.mode == "computer" and self.current_player == 1:
-        self.computer_move()
-    else:
-        row, col = self.get_human_move()
-        if self.board[row][col] != " ":
-            print("Invalid move! That cell is already taken.")
-            return False
-        self.board[row][col] = self.players[self.current_player]
-    return True
+        """Play a single turn for the current player."""
+        if self.mode == "computer" and self.current_player == 1:
+            self.computer_move()
+        else:
+            row, col = self.get_human_move()
+            if self.board[row][col] != " ":
+                print("Invalid move! That cell is already taken.")
+                return False
+            self.board[row][col] = self.players[self.current_player]
+        return True
 
     def get_human_move(self):
-    while True:
-        try:
-            move = input("Enter your move (row and column as '1 3'): ")
-            row, col = map(int, move.split())
-            if row in range(1, 4) and col in range(1, 4):
-                return row - 1, col - 1
-            else:
-                print("Please enter numbers between 1 and 3.")
-        except ValueError:
-            print("Invalid input! Please enter two numbers separated by a space.")
+        """Get the move from a human player."""
+        while True:
+            try:
+                move = input("Enter your move (row and column as '1 3'): ")
+                row, col = map(int, move.split())
+                if row in range(1, 4) and col in range(1, 4):
+                    return row - 1, col - 1
+                else:
+                    print("Please enter numbers between 1 and 3.")
+            except ValueError:
+                print("Invalid input! Please enter two numbers separated by a space.")
 
     def computer_move(self):
         """Make a move for the computer based on difficulty."""
@@ -123,18 +125,20 @@ class TicTacToe:
             return best_score
 
     def check_winner(self, player):
-    for row in self.board:
-        if all(cell == player for cell in row):
+        """Check if the given player has won the game."""
+        for row in self.board:
+            if all(cell == player for cell in row):
+                return player
+        for col in range(3):
+            if all(self.board[row][col] == player for row in range(3)):
+                return player
+        if all(self.board[i][i] == player for i in range(3)) or all(self.board[i][2 - i] == player for i in range(3)):
             return player
-    for col in range(3):
-        if all(self.board[row][col] == player for row in range(3)):
-            return player
-    if all(self.board[i][i] == player for i in range(3)) or all(self.board[i][2 - i] == player for i in range(3)):
-        return player
-    return None
+        return None
 
     def is_full(self):
-    return all(self.board[r][c] != " " for r in range(3) for c in range(3))
+        """Check if the board is full."""
+        return all(self.board[r][c] != " " for r in range(3) for c in range(3))
 
     def play_game(self):
         """Play the full game."""
@@ -186,6 +190,7 @@ class TicTacToe:
                 self.end_game()
                 break
             self.current_player = 1 - self.current_player
+
     def end_game(self):
         """Offer options after the game finishes."""
         print("\nWhat would you like to do next?")
@@ -203,7 +208,7 @@ class TicTacToe:
         else:
             print("Invalid choice! Exiting...")
             exit()
-    
+
     def setup_game(self):
         """Setup the game mode and difficulty."""
         print("\nSelect game mode:")
@@ -241,3 +246,8 @@ Tic Tac Toe Instructions:
             """)
         self.setup_game()
         self.play_game()
+
+if __name__ == "__main__":
+    game = TicTacToe()
+    game.welcome_screen()
+
