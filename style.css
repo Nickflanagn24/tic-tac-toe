@@ -8,6 +8,4 @@ body {
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    font-family: Arial, sans-serif; /* Optional: Customize font */
-    color: white; /* Optional: Text color for better contrast */
 }
