@@ -7,7 +7,7 @@ Tic Tac Toe is a classic two-player game implemented as a command-line applicati
 
 ---
 
-## 1. Logic and Code Efficiency (1.1, 2.1)
+## 1. Logic and Code Efficiency 
 
 ### Code Efficiency
 The application's logic is broken into small, reusable methods and functions, adhering to the principles of DRY (Don’t Repeat Yourself). The core gameplay loop ensures smooth transitions between player turns, validations for moves, and the game's end conditions.
@@ -24,7 +24,7 @@ This modular structure ensures consistency in logic flow and simplifies testing 
 
 ---
 
-## 2. Programming Fundamentals and OOP (3.1, 3.2)
+## 2. Programming Fundamentals and OOP 
 
 ### Programming Constructs
 The project demonstrates:
@@ -94,7 +94,7 @@ Hard Mode significantly increases the difficulty by implementing the **Minimax a
 
 ---
 
-## 4. Planning and Design (4.1)
+## 4. Planning and Design 
 
 The project’s logic was planned and visualized using flowcharts and diagrams. These include:
 - A flowchart for the game loop, detailing player turns, move validation, and game-end conditions.
@@ -104,7 +104,91 @@ The project’s logic was planned and visualized using flowcharts and diagrams. 
 
 ---
 
-## 5. Validation and Testing (5.1, 5.2)
+## 5. Bugs Encountered and Fixes
+
+---
+
+### **1. Invalid Input for Moves**
+**What Happened:**  
+During testing, I noticed that when a player entered something like `a 2` or `4 5`, the game crashed with a `ValueError`. It became clear that the program couldn’t handle invalid input gracefully, which would frustrate players.
+
+**How I Fixed It:**  
+I added validation to ensure that players could only input two numbers between 1 and 3, separated by a space. If the input was invalid, the game displayed an error message and prompted the player to try again. This made the input process much smoother and crash-free.
+
+---
+
+### **2. Overwriting Existing Moves**
+**What Happened:**  
+While testing, I realized that players could overwrite moves already made on the board. For instance, Player 2 could place their symbol in a spot already taken by Player 1, breaking the game’s rules.
+
+**How I Fixed It:**  
+I updated the logic to check if a cell was already occupied before allowing a move. If the cell was taken, the game would notify the player and ask them to choose another spot. This fix ensured fair gameplay and adhered to the rules of Tic Tac Toe.
+
+---
+
+### **3. Incorrect Win Detection**
+**What Happened:**  
+At one point, I noticed that the game didn’t recognize a win when a player formed a diagonal line. For example, Player X could form a winning pattern from the top-left to the bottom-right, but the game wouldn’t acknowledge it.
+
+**How I Fixed It:**  
+I reviewed the win detection logic and realized it didn’t fully account for diagonals. I added checks for both diagonal win conditions, and after testing, all winning scenarios were recognized correctly.
+
+---
+
+### **4. Game Doesn't End on Tie**
+**What Happened:**  
+In a test game, the board filled up completely without a winner, but the game didn’t end. It just kept asking for more moves, even though there were no spaces left to play.
+
+**How I Fixed It:**  
+I added a condition to check for a full board after each turn. If it was, the game declared a tie and ended immediately. This ensured that the game handled ties properly.
+
+### **5. Center or Corner Strategy Fails in Hard Mode**
+**What Happened:**  
+While testing Hard mode, I realized the AI wasn’t prioritizing strategic moves. For example, it would choose an edge cell instead of the center or a corner, making it easier for the player to win.
+
+**How I Fixed It:**  
+I modified the AI’s logic to prioritize the center first, then the corners, and finally the edges. This small change made the AI much more competitive and aligned with optimal Tic Tac Toe strategies.
+
+### **6. Input Not Recognized on Some Platforms**
+**What Happened:**  
+When testing the game on Linux, I found that the input prompt didn’t behave as expected. It either ignored the input or caused an error, even though the same code worked perfectly on Windows.
+
+**How I Fixed It:**  
+I standardized the input handling across platforms by testing and adjusting the input logic for compatibility. After that, the game worked seamlessly on all systems I tested it on.
+
+---
+
+### **7. Game State Not Reset Between Rounds**
+**What Happened:**  
+After finishing a game and selecting "Play Again," I noticed that the board still showed the previous game’s state. The players’ turns also didn’t reset, which caused confusion and made the new game unplayable.
+
+**How I Fixed It:**  
+I implemented a `reset_board` function to clear the board and reset the turn order before starting a new game. This ensured that every new round started with a clean slate.
+
+---
+
+### **8. AI Moves on a Full Board**
+**What Happened:**  
+During one test, the AI attempted to make a move when the board was already full, resulting in an error. It seemed that the AI didn’t account for the board being completely occupied.
+
+**How I Fixed It:**  
+I added a check to ensure the board had available spaces before allowing the AI to make a move. If the board was full, the game declared a tie and ended as expected.
+
+---
+
+### **9. Unclear Turn Display**
+**What Happened:**  
+In Human vs Human mode, I found that players sometimes didn’t know whose turn it was. The game only showed the board, so they had to guess based on the last move.
+
+**How I Fixed It:**  
+I updated the game to clearly display the current player’s name and symbol at the start of each turn. This small change improved the game’s flow and made it easier for players to stay engaged.
+
+---
+
+These were some of the key challenges I encountered during development. Fixing them not only resolved the issues but also enhanced the overall user experience, ensuring smoother and more enjoyable gameplay.
+---
+
+## 6. Validation and Testing
 
 ### Validation Fixes
 Common validation issues addressed:
@@ -125,7 +209,7 @@ PEP 8 validation was used to ensure compliance with Python’s coding standards.
 
 ---
 
-## 6. Code Attribution (6.1)
+## 7. Code Attribution (6.1)
 
 All code was written from scratch except for references to:
 - The Minimax algorithm, which was adapted from open-source resources and modified for this project.
@@ -134,7 +218,7 @@ These external sources were clearly separated and cited in the code comments.
 
 ---
 
-## 7. Deployment Procedure (9.1)
+## 8. Deployment Procedure 
 
 ### Steps to Deploy the Project to Heroku
 
