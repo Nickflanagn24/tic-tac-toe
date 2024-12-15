@@ -1,5 +1,6 @@
 import sys
 import random
+import os
 
 class TicTacToe:
     def __init__(self):
@@ -20,6 +21,10 @@ class TicTacToe:
         
         # Difficulty setting for computer mode ("Easy" or "Hard")
         self.difficulty = ""
+
+    def clear_screen(self):
+        # Clear the terminal screen for a clean view
+        os.system("cls" if os.name == "nt" else "clear")
 
     def print_banner(self):
         # Display the ASCII art banner for the game
@@ -48,14 +53,12 @@ class TicTacToe:
     def print_board(self):
         # Print the current state of the board using emojis for each cell
         # "X" = ✖️, "O" = ⭕, empty = ⬜
-        print("\n")
         for row in self.board:
             print(" | ".join(
                 f"{'✖️' if cell == 'X' else '⭕' if cell == 'O' else '⬜'}" 
                 for cell in row
             ))
             print("-" * 11)
-        print("\n")
 
     def reset_board(self):
         # Reset the board to an empty state and reset the current player
@@ -81,14 +84,15 @@ class TicTacToe:
         # Keep asking until a valid input is provided
         while True:
             try:
-                move = input("Enter your move (row and column as '1 3'): ")
-                row, col = map(int, move.split())
+                move = input("Enter your move (row and column as '1 3'): ").strip()
+                move = "".join(move.split())  # Remove all spaces
+                row, col = int(move[0]), int(move[1])
                 if row in range(1, 4) and col in range(1, 4):
                     return row - 1, col - 1
                 else:
                     print("Please enter numbers between 1 and 3.")
-            except ValueError:
-                print("Invalid input! Please enter two numbers separated by a space.")
+            except (ValueError, IndexError):
+                print("Invalid input! Please enter two numbers in the format '1 3'.")
 
     def computer_move(self):
         # Make a move for the computer.
@@ -173,61 +177,27 @@ class TicTacToe:
         return all(self.board[r][c] != " " for r in range(3) for c in range(3))
 
     def play_game(self):
-        # Orchestrate the game:
-        # 1. Reset the board
-        # 2. Alternate turns between players or player and computer
-        # 3. Check for a winner or tie
+        # Orchestrate the game
         self.reset_board()
-        print(f"\n{self.player_names[0]} is X and {self.player_names[1]} is O.")
+        self.clear_screen()
+        print(f"{self.player_names[0]} is X and {self.player_names[1]} is O.")
         while True:
+            self.clear_screen()
             self.print_board()
             print(f"{self.player_names[self.current_player]}'s turn ({self.players[self.current_player]}).")
-            # Attempt to make a move; if invalid, repeat the turn
             if not self.play_turn():
                 continue
-            
-            # Check if the current player just won
             if self.check_winner(self.players[self.current_player]):
+                self.clear_screen()
                 self.print_board()
-                if self.mode == "computer" and self.current_player == 1:
-                    print(f"Sorry, {self.player_names[0]}! You lost. Better luck next time!")
-                else:
-                    print(f"Congratulations, {self.player_names[self.current_player]}! You win!")
-                self.end_game()
+                print(f"Congratulations, {self.player_names[self.current_player]}! You win!")
                 break
-            
-            # Check for a tie
             if self.is_full():
+                self.clear_screen()
                 self.print_board()
                 print("It's a tie!")
-                self.end_game()
                 break
-            
-            # Switch to the other player
             self.current_player = 1 - self.current_player
-
-    def end_game(self):
-        # After a game finishes (win or tie), ask the player what they want to do next.
-        print("\nWhat would you like to do next?")
-        print("1. Return to the start screen")
-        print("2. Play again")
-        print("3. Exit")
-        choice = input("Enter your choice: ")
-        # Validate the choice
-        while choice not in ["1", "2", "3"]:
-            print("Invalid choice. Please select 1, 2, or 3.")
-            choice = input("Enter your choice: ")
-
-        if choice == "1":
-            # Go back to the welcome screen and potentially change modes or instructions
-            self.welcome_screen()
-        elif choice == "2":
-            # Start a new game immediately
-            self.play_game()
-        elif choice == "3":
-            # Exit the game
-            print(f"Thank you for playing, {self.player_names[0]} and {self.player_names[1]}!")
-            sys.exit()
 
     def setup_game(self):
         # Setup the game mode and difficulty (if playing against the computer).
@@ -235,30 +205,26 @@ class TicTacToe:
         print("1. Human vs Human")
         print("2. Human vs Computer")
         mode_choice = input("Enter your choice: ")
-        # Validate mode choice
         while mode_choice not in ["1", "2"]:
             print("Invalid choice. Please select either 1 (Human vs Human) or 2 (Human vs Computer).")
             mode_choice = input("Enter your choice: ")
 
         if mode_choice == "2":
-            # Computer mode selected: ask for Player 1 name and difficulty
             self.mode = "computer"
-            self.player_names[0] = input("Enter name for Player 1: ")
+            self.player_names[0] = input("Enter name for Player 1: ").strip() or "Player 1"
             self.player_names[1] = "Computer"
             print("Select difficulty:")
             print("1. Easy")
             print("2. Hard")
             difficulty_choice = input("Enter your choice: ")
-            # Validate difficulty choice
             while difficulty_choice not in ["1", "2"]:
                 print("Invalid choice. Please select either 1 (Easy) or 2 (Hard).")
                 difficulty_choice = input("Enter your choice: ")
             self.difficulty = "Easy" if difficulty_choice == "1" else "Hard"
         else:
-            # Human vs Human mode: ask for both player names
             self.mode = "human"
-            self.player_names[0] = input("Enter name for Player 1: ")
-            self.player_names[1] = input("Enter name for Player 2: ")
+            self.player_names[0] = input("Enter name for Player 1: ").strip() or "Player 1"
+            self.player_names[1] = input("Enter name for Player 2: ").strip() or "Player 2"
 
     def welcome_screen(self):
         # Display the welcome screen and ask the user to see instructions or start the game
@@ -266,7 +232,6 @@ class TicTacToe:
         print("1. See instructions")
         print("2. Start game")
         choice = input("Enter your choice: ")
-        # Validate the choice
         while choice not in ["1", "2"]:
             print("Invalid choice. Please select 1 (See instructions) or 2 (Start game).")
             choice = input("Enter your choice: ")
@@ -279,8 +244,6 @@ Tic Tac Toe Instructions:
 - The first to align 3 of their marks in a row, column, or diagonal wins!
 - If the board fills up without a winner, it's a tie.
             """)
-
-        # After possibly showing instructions, set up the game mode and start
         self.setup_game()
         self.play_game()
 
