@@ -2,6 +2,7 @@ import sys
 import random
 import os
 
+
 class TicTacToe:
     def __init__(self):
         self.board = [[" " for _ in range(3)] for _ in range(3)]
@@ -21,7 +22,7 @@ class TicTacToe:
         print("///__   (_) ___  /__   \\__ _  ___  /__   \\___   ___ //")
         print("//  / /\\/ |/ __|   / /\\/ _ |/ __|   / /\\/ _ \\ / _ \\//")
         print("// / /  | | (__   / / | (_| | (__   / / | (_) |  __///")
-        print("// \\/   |_|\\___|  \\/   \\__,_|\\___|  \\/   \\___/ \\___|//")  
+        print("// \\/   |_|\\___|  \\/   \\__,_|\\___|  \\/   \\___/ \\___|//")
         print("//////////////////////////////////////////////////////")
         print("\n")
 
@@ -40,7 +41,7 @@ class TicTacToe:
     def print_board(self):
         for row in self.board:
             print(" | ".join(
-                f"{'✖️' if cell == 'X' else '⭕' if cell == 'O' else '⬜'}" 
+                f"{'✖️' if cell == 'X' else '⭕' if cell == 'O' else '⬜'}"
                 for cell in row
             ))
             print("-" * 11)
@@ -63,9 +64,11 @@ class TicTacToe:
     def get_human_move(self):
         while True:
             try:
-                move = input("Enter your move (row and column as '1 3'): ").strip()
+                move = input(
+                    "Enter your move (row and column as '1 3'): ").strip()
                 if move.lower() == "exit":
-                    print(f"Goodbye, {self.player_names[self.current_player]}!")
+                    print(
+                        f"Goodbye, {self.player_names[self.current_player]}!")
                     sys.exit()
                 move = "".join(move.split())
                 row, col = int(move[0]), int(move[1])
@@ -78,7 +81,8 @@ class TicTacToe:
 
     def computer_move(self):
         if self.difficulty == "Easy":
-            empty_cells = [(r, c) for r in range(3) for c in range(3) if self.board[r][c] == " "]
+            empty_cells = [(r, c) for r in range(3)
+                           for c in range(3) if self.board[r][c] == " "]
             move = random.choice(empty_cells)
         else:
             move = self.minimax_move()
@@ -133,7 +137,8 @@ class TicTacToe:
         for col in range(3):
             if all(self.board[row][col] == player for row in range(3)):
                 return player
-        if all(self.board[i][i] == player for i in range(3)) or all(self.board[i][2 - i] == player for i in range(3)):
+        if all(self.board[i][i] == player for i in range(3)) or all(
+                self.board[i][2 - i] == player for i in range(3)):
             return player
         return None
 
@@ -156,7 +161,10 @@ class TicTacToe:
             self.play_game()
         elif choice == "3":
             if self.mode == "human":
-                print(f"Thank you for playing, {self.player_names[0]} and {self.player_names[1]}!")
+                print(
+                    f"Thank you for playing, {
+                        self.player_names[0]} and {
+                        self.player_names[1]}!")
             else:
                 print(f"Thank you for playing, {self.player_names[0]}!")
             sys.exit()
@@ -167,14 +175,16 @@ class TicTacToe:
         print(f"{self.player_names[0]} is X and {self.player_names[1]} is O.")
         while True:
             self.clear_screen()
-            print(f"{self.player_names[self.current_player]}'s turn ({self.players[self.current_player]}):")
+            print(
+                f"{self.player_names[self.current_player]}'s turn ({self.players[self.current_player]}):")
             self.print_board()
             if not self.play_turn():
                 continue
             if self.check_winner(self.players[self.current_player]):
                 self.clear_screen()
                 self.print_board()
-                print(f"Congratulations, {self.player_names[self.current_player]}! You win!")
+                print(
+                    f"Congratulations, {self.player_names[self.current_player]}! You win!")
                 self.end_game()
                 break
             if self.is_full():
@@ -191,12 +201,14 @@ class TicTacToe:
         print("2. Human vs Computer")
         mode_choice = input("Enter your choice: ")
         while mode_choice not in ["1", "2"]:
-            print("Invalid choice. Please select either 1 (Human vs Human) or 2 (Human vs Computer).")
+            print(
+                "Invalid choice. Please select either 1 (Human vs Human) or 2 (Human vs Computer).")
             mode_choice = input("Enter your choice: ")
 
         if mode_choice == "2":
             self.mode = "computer"
-            self.player_names[0] = input("Enter name for Player 1: ").strip() or "Player 1"
+            self.player_names[0] = input(
+                "Enter name for Player 1: ").strip() or "Player 1"
             self.player_names[1] = "Computer"
             print("Select difficulty:")
             print("1. Easy")
@@ -208,8 +220,10 @@ class TicTacToe:
             self.difficulty = "Easy" if difficulty_choice == "1" else "Hard"
         else:
             self.mode = "human"
-            self.player_names[0] = input("Enter name for Player 1: ").strip() or "Player 1"
-            self.player_names[1] = input("Enter name for Player 2: ").strip() or "Player 2"
+            self.player_names[0] = input(
+                "Enter name for Player 1: ").strip() or "Player 1"
+            self.player_names[1] = input(
+                "Enter name for Player 2: ").strip() or "Player 2"
 
     def welcome_screen(self):
         self.print_welcome()
@@ -229,6 +243,7 @@ Tic Tac Toe Instructions:
             """)
         self.setup_game()
         self.play_game()
+
 
 if __name__ == "__main__":
     game = TicTacToe()
