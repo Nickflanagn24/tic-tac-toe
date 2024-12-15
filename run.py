@@ -25,6 +25,8 @@ class TicTacToe:
     def clear_screen(self):
         # Clear the terminal screen for a clean view
         os.system("cls" if os.name == "nt" else "clear")
+        # Reprint the banner at the top
+        self.print_banner()
 
     def print_banner(self):
         # Display the ASCII art banner for the game
@@ -179,14 +181,14 @@ class TicTacToe:
     def play_game(self):
         # Orchestrate the game
         self.reset_board()
-        self.clear_screen()
+        self.clear_screen()  # Clears the screen and shows the banner
         print(f"{self.player_names[0]} is X and {self.player_names[1]} is O.")
         while True:
-            self.clear_screen()
-            self.print_board()
-            print(f"{self.player_names[self.current_player]}'s turn ({self.players[self.current_player]}).")
+            self.clear_screen()  # Clear the screen and reprint the banner
+            print(f"{self.player_names[self.current_player]}'s turn ({self.players[self.current_player]}):")
+            self.print_board()  # Display the game board
             if not self.play_turn():
-                continue
+                continue  # If the move was invalid, repeat the turn
             if self.check_winner(self.players[self.current_player]):
                 self.clear_screen()
                 self.print_board()
