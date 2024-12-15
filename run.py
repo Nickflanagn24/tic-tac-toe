@@ -47,11 +47,11 @@ class TicTacToe:
 
     def print_board(self):
         # Print the current state of the board using emojis for each cell
-        # "X" = ❌, "O" = ⭕, empty = ⬜
+        # "X" = ✖️, "O" = ⭕, empty = ⬜
         print("\n")
         for row in self.board:
             print(" | ".join(
-                f"{'❌' if cell == 'X' else '⭕' if cell == 'O' else '⬜'}" 
+                f"{'✖️' if cell == 'X' else '⭕' if cell == 'O' else '⬜'}" 
                 for cell in row
             ))
             print("-" * 11)
