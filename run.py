@@ -4,32 +4,18 @@ import os
 
 class TicTacToe:
     def __init__(self):
-        # Initialize the game board as a 3x3 grid of empty spaces
         self.board = [[" " for _ in range(3)] for _ in range(3)]
-        
-        # Players: "X" and "O"
         self.players = ["X", "O"]
-        
-        # Start with player 0 ("X") as the current player
         self.current_player = 0
-        
-        # Default player names
         self.player_names = ["Player 1", "Player 2"]
-        
-        # Default game mode ("human" vs "computer")
         self.mode = "human"
-        
-        # Difficulty setting for computer mode ("Easy" or "Hard")
         self.difficulty = ""
 
     def clear_screen(self):
-        # Clear the terminal screen for a clean view
         os.system("cls" if os.name == "nt" else "clear")
-        # Reprint the banner at the top
         self.print_banner()
 
     def print_banner(self):
-        # Display the ASCII art banner for the game
         print("//////////////////////////////////////////////////////")
         print("// _____ _        _____             _____           //")
         print("///__   (_) ___  /__   \\__ _  ___  /__   \\___   ___ //")
@@ -40,7 +26,6 @@ class TicTacToe:
         print("\n")
 
     def print_welcome(self):
-        # Show the welcome screen with instructions
         self.print_banner()
         print("=================================")
         print("       Welcome to Tic Tac Toe    ")
@@ -53,8 +38,6 @@ class TicTacToe:
         print()
 
     def print_board(self):
-        # Print the current state of the board using emojis for each cell
-        # "X" = ✖️, "O" = ⭕, empty = ⬜
         for row in self.board:
             print(" | ".join(
                 f"{'✖️' if cell == 'X' else '⭕' if cell == 'O' else '⬜'}" 
@@ -63,18 +46,14 @@ class TicTacToe:
             print("-" * 11)
 
     def reset_board(self):
-        # Reset the board to an empty state and reset the current player
         self.board = [[" " for _ in range(3)] for _ in range(3)]
         self.current_player = 0
 
     def play_turn(self):
-        # Play a single turn. If it's the computer's turn, let the AI pick a move,
-        # otherwise prompt a human player for input.
         if self.mode == "computer" and self.current_player == 1:
             self.computer_move()
         else:
             row, col = self.get_human_move()
-            # Check if the chosen cell is empty
             if self.board[row][col] != " ":
                 print("Invalid move! That cell is already taken.")
                 return False
@@ -82,12 +61,13 @@ class TicTacToe:
         return True
 
     def get_human_move(self):
-        # Prompt the human player for a valid move (row and column)
-        # Keep asking until a valid input is provided
         while True:
             try:
                 move = input("Enter your move (row and column as '1 3'): ").strip()
-                move = "".join(move.split())  # Remove all spaces
+                if move.lower() == "exit":
+                    print(f"Goodbye, {self.player_names[self.current_player]}!")
+                    sys.exit()
+                move = "".join(move.split())
                 row, col = int(move[0]), int(move[1])
                 if row in range(1, 4) and col in range(1, 4):
                     return row - 1, col - 1
@@ -97,24 +77,20 @@ class TicTacToe:
                 print("Invalid input! Please enter two numbers in the format '1 3'.")
 
     def computer_move(self):
-        # Make a move for the computer.
-        # In Easy mode, pick a random empty cell.
-        # In Hard mode, use the minimax algorithm to choose the best move.
         if self.difficulty == "Easy":
             empty_cells = [(r, c) for r in range(3) for c in range(3) if self.board[r][c] == " "]
             move = random.choice(empty_cells)
-        else:  # Hard mode
+        else:
             move = self.minimax_move()
         self.board[move[0]][move[1]] = self.players[self.current_player]
 
     def minimax_move(self):
-        # Use the minimax algorithm to find the best possible move for the AI.
         best_score = float("-inf")
         best_move = None
         for r in range(3):
             for c in range(3):
                 if self.board[r][c] == " ":
-                    self.board[r][c] = self.players[1]  # Place "O"
+                    self.board[r][c] = self.players[1]
                     score = self.minimax(False)
                     self.board[r][c] = " "
                     if score > best_score:
@@ -165,7 +141,6 @@ class TicTacToe:
         return all(self.board[r][c] != " " for r in range(3) for c in range(3))
 
     def end_game(self):
-        # After a game finishes, let the players choose the next step.
         print("\nWhat would you like to do next?")
         print("1. Return to the start screen")
         print("2. Play again")
@@ -180,7 +155,10 @@ class TicTacToe:
         elif choice == "2":
             self.play_game()
         elif choice == "3":
-            print(f"Thank you for playing, {self.player_names[0]} and {self.player_names[1]}!")
+            if self.mode == "human":
+                print(f"Thank you for playing, {self.player_names[0]} and {self.player_names[1]}!")
+            else:
+                print(f"Thank you for playing, {self.player_names[0]}!")
             sys.exit()
 
     def play_game(self):
@@ -213,7 +191,7 @@ class TicTacToe:
         print("2. Human vs Computer")
         mode_choice = input("Enter your choice: ")
         while mode_choice not in ["1", "2"]:
-            print("Invalid choice. Please select 1 (Human vs Human) or 2 (Human vs Computer).")
+            print("Invalid choice. Please select either 1 (Human vs Human) or 2 (Human vs Computer).")
             mode_choice = input("Enter your choice: ")
 
         if mode_choice == "2":
