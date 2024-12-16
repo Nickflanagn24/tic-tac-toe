@@ -1,6 +1,6 @@
 # Tic Tac Toe - Command-Line Application
 
-![Flowchart](overview-placeholder.png)
+![mockup pic](overview-placeholder.png)
 
 ## Overview
 Tic Tac Toe is a classic two-player game implemented as a command-line application. This project was designed to demonstrate programming fundamentals, object-oriented programming (OOP), and clean code practices while creating an engaging and functional application. The project caters to both human players and includes an option to play against a computer opponent with adjustable difficulty.
@@ -183,10 +183,9 @@ In Human vs Human mode, I found that players sometimes didn’t know whose turn 
 **How I Fixed It:**  
 I updated the game to clearly display the current player’s name and symbol at the start of each turn. This small change improved the game’s flow and made it easier for players to stay engaged.
 
----
-
 These were some of the key challenges I encountered during development. Fixing them not only resolved the issues but also enhanced the overall user experience, ensuring smoother and more enjoyable gameplay.
----
+
+### There are no remaining bugs
 
 ## 6. Validation and Testing
 
@@ -209,7 +208,25 @@ PEP 8 validation was used to ensure compliance with Python’s coding standards.
 
 ---
 
-## 7. Code Attribution (6.1)
+## 7. Possible Future Updates
+#### Larger Board Sizes
+- Description: Allow players to choose from different board sizes (e.g., 4x4, 5x5) with adjusted win conditions (e.g., 4 in a row for larger boards).
+- Benefit: Adds variety and makes the game more challenging.
+- Implementation Idea: Dynamically generate the board and modify the win-checking logic to support different dimensions.
+
+#### Scoring System
+- Description: Implement a scoring mechanism to track wins, losses, and ties across multiple games.
+- Benefit: Encourages competition and replayability.
+ -Implementation Idea: Store scores in a file or a database and display them after each game or in a leaderboard.
+
+#### Alternate Game Modes
+Update: Introduce new modes to keep the game fresh, such as:
+- Timed Mode: Players must make moves within a time limit.
+- Reverse Mode: The player who forces the other to win loses.
+- Benefit: Adds variety and unique challenges to the game.
+
+
+## 8. Code Attribution 
 
 All code was written from scratch except for references to:
 - The Minimax algorithm, which was adapted from open-source resources and modified for this project.
