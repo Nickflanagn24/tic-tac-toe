@@ -189,19 +189,13 @@ These were some of the key challenges I encountered during development. Fixing t
 
 ## 6. Validation and Testing
 
-### Validation Fixes
-Common validation issues addressed:
-- Preventing players from selecting already occupied cells.
-- Ensuring valid input (e.g., numbers between 1 and 3 for row and column).
-- Fixing edge cases where Minimax logic caused errors.
-
 ### Manual Testing
 The application was tested manually, including:
 - Simulating all possible win conditions (rows, columns, diagonals).
 - Testing tie conditions.
 - Switching between game modes and difficulties.
-
-PEP 8 validation was used to ensure compliance with Python’s coding standards.
+- PEP 8 validation was used to ensure compliance with Python’s coding standards.
+- Each validator was tested to individually to make sure that they worked correctly and couldn't be broken.  They can all be seen in the table below.
 
 # Validation Table for `run.py`
 
@@ -219,11 +213,6 @@ PEP 8 validation was used to ensure compliance with Python’s coding standards.
 | **Tie Detection**             | Checks if all cells on the board are filled and no winner is detected.                                      | Tie condition detected: Declares a tie and displays a message.                                                                                                        | None (tie condition is built into the game loop).                                                                                               |
 
 ---
-
-### Notes:
-- **Error Handling:** The application ensures graceful error handling for all possible invalid inputs, guiding the user back to the correct flow of the game.
-- **Outcomes:** All valid inputs result in clear outcomes, such as board updates, game progression, or appropriate messages for winning/tie scenarios.
-- **Future Improvements:** Adding custom error messages for specific edge cases (e.g., no valid moves for AI) could improve user feedback further.
 
 
 **Placeholder Screenshot:**
