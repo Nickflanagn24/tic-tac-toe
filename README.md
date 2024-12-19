@@ -42,7 +42,15 @@ This OOP approach ensures scalability and future extensibility, such as integrat
 
 ---
 
-## 3. Easy and Hard Modes
+## 3. Planning and Design 
+
+The project’s logic was planned and visualized using flowcharts and diagrams. These include:
+- A flowchart for the game loop, detailing player turns, move validation, and game-end conditions.
+- A decision tree outlining the computer's moves based on difficulty.
+- Below you can see the flowchart that was made in the planning stage to plan out the functions.
+![Flowchart](assets/images/flowchart.webp)
+
+## 4. Easy and Hard Modes
 
 ### **Easy Mode**
 In Easy Mode, the computer makes random moves by selecting from the available spaces on the board. This approach doesn't consider winning strategies or blocking the opponent, making the computer predictable and easier to beat.
@@ -91,16 +99,6 @@ Hard Mode significantly increases the difficulty by implementing the **Minimax a
 | **Blocking Player’s Win**| No                      | Yes                      |
 | **Long-Term Planning**   | No                      | Yes                      |
 | **Difficulty Level**     | Beginner-Friendly       | Challenging              |
-
----
-
-## 4. Planning and Design 
-
-The project’s logic was planned and visualized using flowcharts and diagrams. These include:
-- A flowchart for the game loop, detailing player turns, move validation, and game-end conditions.
-- A decision tree outlining the computer's moves based on difficulty.
-- Below you can see the flowchart that was made in the planning stage to plan out the functions.
-![Flowchart](assets/images/flowchart.webp)
 
 ---
 
@@ -197,7 +195,7 @@ The application was tested manually, including:
 - PEP 8 validation was used to ensure compliance with Python’s coding standards.
 - Each validator was tested to individually to make sure that they worked correctly and couldn't be broken.  They can all be seen in the table below.
 
-# Validation Table for `run.py`
+### Validation Table for `Tic Tac Toe`
 
 | **Input Type**               | **Validation Criteria**                                                                                      | **Outcome**                                                                                                                                                           | **Error Handled**                                                                                          |
 |-------------------------------|-------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
@@ -238,14 +236,17 @@ Update: Introduce new modes to keep the game fresh, such as:
 - Benefit: Adds variety and unique challenges to the game.
 
 
-## 8. Code Attribution 
+## 8. Credits
 
-All code was written from scratch except for references to:
-- The Minimax algorithm, which was adapted from open-source resources and modified for this project.
+### **Strategies for AI**
+- The strategies for building the AI logic, including the optimal moves and game-winning strategies, were inspired by information found on the [Wikipedia Tic Tac Toe page](https://en.wikipedia.org/wiki/Tic-tac-toe).
 
-These external sources were clearly separated and cited in the code comments.
+### **Understanding Python Classes**
+- To better understand how to use classes in Python and apply object-oriented programming principles, I referred to this [YouTube tutorial on Python Classes](https://www.youtube.com/watch?si=iXEJF3_q6E-BX815&v=ZDa-Z5JzLYM&feature=youtu.be).
 
 ---
+
+These resources were invaluable in helping me implement key features of the project effectively.
 
 ## 8. Deployment Procedure 
 
