@@ -1,38 +1,17 @@
-<!DOCTYPE html>
+HTML? - <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Meta Tags -->
-    <meta name="description" content="Python Terminal by Code Institute - An interactive terminal emulator powered by xterm.js.">
-    <meta name="keywords" content="Python, Terminal, Emulator, Code Institute, xterm.js">
-    <meta name="author" content="Nick Flanagan">
-
-    <!-- Favicon -->
-    <link rel="icon" href="https://www.flaticon.com/icons/png/512/1021/1021366.png" type="image/png">
-
-    <!-- External Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/xterm.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/addons/attach/attach.js"></script>
-
-    <title>Tic Tac Toe</title>
-
+    <title>Python Terminal by Code Institute</title>
     <style>
         body {
             font-family: Arial;
-            background-image: url('https://images.app.goo.gl/TgUpmMUpk2mkGQ329');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
         }
 
         /**
@@ -55,6 +34,10 @@
         .xterm .xterm-helpers {
             position: absolute;
             top: 0;
+            /**
+        * The z-index of the helpers must be higher than the canvases in order for
+        * IMEs to appear on top.
+        */
             z-index: 5;
         }
 
@@ -62,6 +45,7 @@
             padding: 0;
             border: 0;
             margin: 0;
+            /* Move textarea out of the screen to the far left, so that the cursor is not visible */
             position: absolute;
             opacity: 0;
             left: -9999em;
@@ -69,12 +53,14 @@
             width: 0;
             height: 0;
             z-index: -5;
+            /** Prevent wrapping so the IME appears against the textarea at the correct position */
             white-space: nowrap;
             overflow: hidden;
             resize: none;
         }
 
         .xterm .composition-view {
+            /* TODO: Composition position got messed up somewhere */
             background: #000;
             color: #FFF;
             display: none;
@@ -88,6 +74,7 @@
         }
 
         .xterm .xterm-viewport {
+            /* On OS X this is required in order for the scroll bar to appear fully opaque */
             background-color: #000;
             overflow-y: scroll;
             cursor: default;
@@ -128,6 +115,7 @@
         }
 
         .xterm.enable-mouse-events {
+            /* When mouse events are enabled (eg. tmux), revert to the standard pointer cursor */
             cursor: default;
         }
 
@@ -136,6 +124,7 @@
         }
 
         .xterm.column-select.focus {
+            /* Column selection mode */
             cursor: crosshair;
         }
 
@@ -179,9 +168,6 @@
     </style>
 </head>
 
-<body>
-    <!-- Terminal Container -->
-    <div id="terminal-container"></div>
-</body>
+@{body}
 
 </html>
