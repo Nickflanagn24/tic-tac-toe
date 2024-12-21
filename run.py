@@ -79,7 +79,8 @@ for Human vs Computer mode.")
                 else:
                     print("Please enter numbers between 1 and 3.")
             except (ValueError, IndexError):
-                print("Invalid input! Please enter two numbers in the format '1 3'.")
+                print("Invalid input! Please enter \
+two numbers in the format '1 3'.")
 
     def computer_move(self):
         if self.difficulty == "Easy":
