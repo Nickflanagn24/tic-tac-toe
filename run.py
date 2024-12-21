@@ -179,7 +179,8 @@ two numbers in the format '1 3'.")
         while True:
             self.clear_screen()
             print(
-                f"{self.player_names[self.current_player]}'s turn ({self.players[self.current_player]}):")
+                f"{self.player_names[self.current_player]}'s \
+turn ({self.players[self.current_player]}):")
             self.print_board()
             if not self.play_turn():
                 continue
